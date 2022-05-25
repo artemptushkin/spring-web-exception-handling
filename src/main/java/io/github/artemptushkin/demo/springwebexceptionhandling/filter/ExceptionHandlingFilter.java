@@ -19,6 +19,10 @@ import java.io.PrintWriter;
 @RequiredArgsConstructor
 public class ExceptionHandlingFilter extends OncePerRequestFilter {
     private final DefaultExceptionHandler exceptionHandler;
+    /**
+     * naming this differently than _objectMapper_ you give a chance your code to pass a specific object mapper by the qualifier
+     * the field name will be considered as the name of the bean
+     */
     private final ObjectMapper exceptionHandlerObjectMapper;
 
     @Override

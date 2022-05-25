@@ -12,8 +12,9 @@ public class ExampleFilterThatThrows implements Filter {
         if (request instanceof HttpServletRequest httpServletRequest) {
             String headerThatBreaks = httpServletRequest.getHeader("header-that-breaks");
             if (headerThatBreaks != null) {
-                throw new CustomExceptionInFilter("It supposed to fail in order to demo");
+                throw new CustomExceptionInFilter("I'm exception from filter that setup after the exception filter");
             }
+            chain.doFilter(request, response);
         } else {
             chain.doFilter(request, response);
         }

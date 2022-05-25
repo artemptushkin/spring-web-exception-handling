@@ -23,11 +23,20 @@ class SpringWebExceptionHandlingBestPracticesApplicationTests {
     }
 
     @Test
-    void itThrowsExceptionInFilterAndReturnBadRequest() {
+    void itThrowsExceptionInFilterAndReturnsBadRequest() {
         given()
                 .header("header-that-breaks", "it-will-throw-exception-in-filter")
                 .when()
                 .request("GET", "/demo/hello")
+                .then()
+                .statusCode(400);
+    }
+
+    @Test
+    void itThrowsExceptionInControllerAndReturnsBadRequest() {
+        given()
+                .when()
+                .request("GET", "/demo/it-throws")
                 .then()
                 .statusCode(400);
     }
