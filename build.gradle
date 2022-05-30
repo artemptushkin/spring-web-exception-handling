@@ -18,8 +18,16 @@ repositories {
     mavenCentral()
 }
 
+ext {
+    enableWeb = project.properties['webProfile'] == null || project.properties['webProfile'] == 'servlet'
+}
+
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-web'
+    if (enableWeb) {
+        println "starter-web to be enabled"
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+    }
+    implementation 'javax.servlet:javax.servlet-api:4.0.1'
     implementation 'org.springframework.security:spring-security-web'
     implementation 'org.springframework.security:spring-security-config'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'

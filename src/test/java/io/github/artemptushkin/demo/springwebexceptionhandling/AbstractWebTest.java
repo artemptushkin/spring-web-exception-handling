@@ -3,16 +3,12 @@ package io.github.artemptushkin.demo.springwebexceptionhandling;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
 
-@ExtendWith(SpringExtension.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class SpringWebExceptionHandlingBestPracticesApplicationTests {
+public abstract class AbstractWebTest {
 
     @LocalServerPort
     Integer serverPort;
@@ -29,7 +25,9 @@ class SpringWebExceptionHandlingBestPracticesApplicationTests {
                 .when()
                 .request("GET", "/demo/hello")
                 .then()
-                .statusCode(400);
+                .statusCode(400)
+                .body("code", equalTo(400))
+                .body("message", equalTo("I'm exception from filter that setup after the exception filter"));
     }
 
     @Test
@@ -38,7 +36,8 @@ class SpringWebExceptionHandlingBestPracticesApplicationTests {
                 .when()
                 .request("GET", "/demo/it-throws")
                 .then()
-                .statusCode(400);
+                .statusCode(400)
+                .body("code", equalTo(400))
+                .body("message", equalTo("I'm a demo exception from controller"));
     }
-
 }

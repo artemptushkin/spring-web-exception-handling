@@ -1,4 +1,4 @@
-package io.github.artemptushkin.demo.springwebexceptionhandling.filter;
+package io.github.artemptushkin.demo.springwebexceptionhandling.filter.servlet;
 
 import io.github.artemptushkin.demo.springwebexceptionhandling.controller.CustomExceptionInFilter;
 

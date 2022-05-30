@@ -1,13 +1,16 @@
-package io.github.artemptushkin.demo.springwebexceptionhandling.controller;
+package io.github.artemptushkin.demo.springwebexceptionhandling.controller.servlet;
 
-import org.springframework.http.HttpStatus;
+import io.github.artemptushkin.demo.springwebexceptionhandling.controller.CustomExceptionInController;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
+import org.springframework.context.annotation.Profile;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@Profile("servlet")
 @RequestMapping("/demo")
+@ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
 public class DemoController {
 
     @GetMapping("/hello")

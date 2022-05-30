@@ -1,9 +1,11 @@
-package io.github.artemptushkin.demo.springwebexceptionhandling.filter;
+package io.github.artemptushkin.demo.springwebexceptionhandling.filter.servlet;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.github.artemptushkin.demo.springwebexceptionhandling.controller.DefaultExceptionHandler;
+import io.github.artemptushkin.demo.springwebexceptionhandling.controller.servlet.ServletExceptionHandler;
 import io.github.artemptushkin.demo.springwebexceptionhandling.controller.domain.ErrorResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -16,9 +18,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 @Component
+@Profile("servlet")
 @RequiredArgsConstructor
+@ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
 public class ExceptionHandlingFilter extends OncePerRequestFilter {
-    private final DefaultExceptionHandler exceptionHandler;
+    private final ServletExceptionHandler exceptionHandler;
     /**
      * naming this differently than _objectMapper_ you give a chance your code to pass a specific object mapper by the qualifier
      * the field name will be considered as the name of the bean
