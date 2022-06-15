@@ -1,3 +1,5 @@
-adopt back ... https://spring.io/blog/2022/02/21/spring-security-without-the-websecurityconfigureradapter
+### Spring Web / WebFlux exception handling demo repository
 
-In Spring Security 5.7.0-M2
+* [The corresponded medium article](https://art-ptushkin.medium.com/spring-web-and-webflux-exception-handling-best-practices-b2c3cd7e3acf)
+
+This repository contains well-tested clean code examples of how to run your Spring expection hanlder as in Web and WebFlux stack
