@@ -11,3 +11,16 @@ This repository contains well-tested clean code examples of how to run your Spri
 * https://docs.spring.io/spring-security/reference/reactive/configuration/webflux.html
 * https://www.baeldung.com/spring-webflux-errors
 * https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html#webflux-exception-handler
+
+### How to run tests?
+
+Web:
+```shell
+./gradlew :test --tests "io.github.artemptushkin.demo.springwebexceptionhandling.ServletControllerTest"
+```
+or use [Intellij Idea run configuration](.run)
+
+WebFlux
+```shell
+:test -PwebProfile=reactive --tests "io.github.artemptushkin.demo.springwebexceptionhandling.ReactiveControllerTest"
+```
