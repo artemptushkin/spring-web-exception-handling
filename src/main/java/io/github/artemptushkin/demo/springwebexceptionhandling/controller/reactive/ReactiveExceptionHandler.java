@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.server.*;
+import org.springframework.web.server.ResponseStatusException;
 import reactor.core.publisher.Mono;
 
 import java.util.Map;
@@ -35,9 +36,11 @@ public class ReactiveExceptionHandler extends AbstractErrorWebExceptionHandler {
     private Mono<ServerResponse> renderErrorResponse(ServerRequest request) {
 
         Throwable error = getError(request);
-        log.error("An error has been occurred", error);
+        log.error("An error has occurred", error);
         HttpStatus httpStatus;
-        if (error instanceof Exception exception) {
+        if (error instanceof ResponseStatusException responseStatusException) {
+            httpStatus = HttpStatus.valueOf(responseStatusException.getStatusCode().value());
+        } else if (error instanceof Exception exception) {
             httpStatus = exceptionToStatusCode.getOrDefault(exception.getClass(), defaultStatus);
         } else {
             httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
